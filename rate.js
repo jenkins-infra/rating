@@ -42,7 +42,6 @@ function do_loaddata() {
     }
     div2.innerHTML = txt;
     div1.appendChild(div2);
-    // anchors[i].parentNode.appendChild(div1);
     insertAfter(anchors[i].parentNode,div1);
   }
 }
