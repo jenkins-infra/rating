@@ -6,12 +6,12 @@
   if (!$db) die('DB error');
   $data = array();
   $q = pg_query($db,
-    'select version, count(*) from hudson_good group by version');
+    'select version, count(*) from jenkins_good group by version');
   while ($row = pg_fetch_row($q)) {
     $data[$row[0]] = array('good' => $row[1]);
   }
   $q = pg_query($db,
-    'select version, rollback, issue from hudson_bad order by version');
+    'select version, rollback, issue from jenkins_bad order by version');
   while ($row = pg_fetch_row($q)) {
     $data[$row[0]][$row[1]=='t' ? 'rollback' : 'nolike']++;
     if ($row[2]) $data[$row[0]]['issues'][] = $row[2];

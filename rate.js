@@ -4,7 +4,7 @@ var crumb = { wrap: function() { } };
 function loaddata(link) {
   var script = document.createElement('SCRIPT');
   script.type = 'text/javascript';
-  script.src = 'http://hudson-labs.org/rate/result.php';
+  script.src = 'http://jenkins-ci.org/rate/result.php';
   script.onload = function() { do_loaddata(); }
   script.onreadystatechange = function() { // For IE
     if (this.readyState=='loaded' || this.readyState=='complete') do_loaddata();
@@ -16,7 +16,7 @@ function loaddata(link) {
 }
 
 function health(nm,sz,ver,rate) {
-  return '<img src="http://ci.hudson-labs.org/images/' + sz + 'x' + sz + '/health-' + nm
+  return '<img src="http://ci.jenkins-ci.org/images/' + sz + 'x' + sz + '/health-' + nm
        + '.gif" width="' + sz + '" height="' + sz + '" onclick="rate(\'' + ver
        + '\',' + rate + ')" class="rate" alt=""/>';
 }
@@ -37,7 +37,7 @@ function do_loaddata() {
     if (r && r.length > 3) {
       txt += '<span class="related-issues">Related issues: ';
       for (j = 3; j < r.length; j++)
-        txt += '<a href="http://hudson-ci.org/issue/' + r[j] + '">HUDSON-' + r[j] + '</a> ';
+        txt += '<a href="http://jenkins-ci.org/issue/' + r[j] + '">JENKINS-' + r[j] + '</a> ';
       txt += '</span>';
     }
     div2.innerHTML = txt;
@@ -55,7 +55,7 @@ function rate(version,rating) {
   if (issue==null) return; // Cancelled
   var script = document.createElement('SCRIPT');
   script.type = 'text/javascript';
-  script.src = 'http://hudson-labs.org/rate/submit.php?version='
+  script.src = 'http://jenkins-ci.org/rate/submit.php?version='
     + encodeURIComponent(version) + '&rating=' + rating + '&issue=' + encodeURIComponent(issue);
   script.onload = function() { alert('Thanks!'); location.reload(); }
   script.onreadystatechange = function() { // For IE
