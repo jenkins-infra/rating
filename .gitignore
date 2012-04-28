@@ -3,5 +3,5 @@
 .project
 .settings
 bin
-logs/*.*
+logs/*
 
