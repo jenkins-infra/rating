@@ -22,7 +22,7 @@
   foreach ($data as $version => $info) {
     if ($first) $first = false; else print ",\n";
     foreach (array('good','rollback','nolike') as $key) if (!isset($info[$key])) $info[$key] = 0;
-    print "'$version': [$info[good],$info[nolike],$info[rollback]";
+    print json_encode($version) . ": [$info[good],$info[nolike],$info[rollback]";
     if ($info[issues]) foreach (array_unique($info['issues']) as $issue) print ",$issue";
     print "]";
   }
