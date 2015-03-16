@@ -22,10 +22,9 @@ function health(nm,sz,ver,rate) {
 }
 
 function do_loaddata() {
-  var r, v, j, first = true, div1, div2, txt;
+  var r, v, j = true, div1, div2, txt;
   for (var anchors = document.getElementsByTagName('A'), i = 0; i < anchors.length; i++) {
     if (anchors[i].name.charAt(0) != 'v') continue;
-    if (first) { first = false; continue; } // Skip first anchor (for upcoming release)
     r = data[v = anchors[i].name.substring(1)];
     div1 = document.createElement('DIV');
     div1.className = 'rate-outer';
