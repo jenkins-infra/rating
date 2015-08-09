@@ -23,7 +23,13 @@
     if ($first) $first = false; else print ",\n";
     foreach (array('good','rollback','nolike') as $key) if (!isset($info[$key])) $info[$key] = 0;
     print json_encode($version) . ": [$info[good],$info[nolike],$info[rollback]";
-    if ($info[issues]) foreach (array_unique($info['issues']) as $issue) print ",$issue";
+    if ($info[issues]) {
+      $issues = array_count_values($info['issues']);
+      arsort($issues);
+      foreach ($issues as $issue => $counts) {
+        print ",$issue,$counts";
+      }
+    }
     print "]";
   }
   print "\n};\n";

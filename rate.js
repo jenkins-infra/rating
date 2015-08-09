@@ -35,8 +35,8 @@ function do_loaddata() {
         + (r && r[2] ? r[2] + ' ' : '') + health('00to19',(r && r[2] ? 32 : 16),v,-1);
     if (r && r.length > 3) {
       txt += '<span class="related-issues">Related issues: ';
-      for (j = 3; j < r.length; j++)
-        txt += '<a href="https://jenkins-ci.org/issue/' + r[j] + '">JENKINS-' + r[j] + '</a> ';
+      for (j = 3; j < r.length; j+=2)
+        txt += r[j+1] + '&times;<a href="https://jenkins-ci.org/issue/' + r[j] + '">JENKINS-' + r[j] + '</a> ';
       txt += '</span>';
     }
     div2.innerHTML = txt;
