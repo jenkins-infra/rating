@@ -51,7 +51,7 @@ function insertAfter(anchor,node) {
 }
 
 function rate(version,rating) {
-  var issue = (rating <= 0) ? prompt('Optionally provide issue number causing trouble:','') : '';
+  var issue = (rating <= 0) ? prompt('Please provide issue number from our JIRA causing trouble:','') : '';
   if (issue==null) return; // Cancelled
   var script = document.createElement('SCRIPT');
   script.type = 'text/javascript';
