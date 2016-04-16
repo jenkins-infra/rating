@@ -2,7 +2,7 @@
   header('Content-type: text/javascript');
   header('Cache-control: no-cache');
   require_once('/config/dbconfig.php');
-  $db = @pg_connect("user=$dbuser password=$dbpass host=$dbserver dbname=mindless");
+  $db = @pg_connect("user=$dbuser password=$dbpass host=$dbserver dbname=$dbname");
   if (!$db) die('DB error');
   $data = array();
   $q = pg_query($db,

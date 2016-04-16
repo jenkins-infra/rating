@@ -2,7 +2,7 @@
   /* @author Alan Harder */
   if ($_GET['version']) {
     require_once('/config/dbconfig.php');
-    $db = @pg_connect("user=$dbuser password=$dbpass host=$dbserver dbname=mindless");
+    $db = @pg_connect("user=$dbuser password=$dbpass host=$dbserver dbname=$dbname");
     if (!$db) die('DB error');
     $voter = $_SERVER['HTTP_X_FORWARDED_FOR'];
     if (empty($voter)) $voter = $_SERVER['REMOTE_ADDR'];
