@@ -1,7 +1,7 @@
 <?php
   /* @author Alan Harder */
   if ($_GET['version']) {
-    require_once('/usr/share/drupal6/sites/default/dbconfig.php');
+    require_once('/config/dbconfig.php');
     $db = @pg_connect("user=$dbuser password=$dbpass host=$dbserver dbname=mindless");
     if (!$db) die('DB error');
     $voter = $_SERVER['HTTP_X_FORWARDED_FOR'];
