@@ -4,7 +4,7 @@ var crumb = { wrap: function() { } };
 function loaddata(link) {
   var script = document.createElement('SCRIPT');
   script.type = 'text/javascript';
-  script.src = 'http://rating.jenkins.io/rate/result.php';
+  script.src = 'https://rating.jenkins.io/rate/result.php';
   script.onload = function() { do_loaddata(); }
   script.onreadystatechange = function() { // For IE
     if (this.readyState=='loaded' || this.readyState=='complete') do_loaddata();
@@ -54,7 +54,7 @@ function rate(version,rating) {
   if (issue==null) return; // Cancelled
   var script = document.createElement('SCRIPT');
   script.type = 'text/javascript';
-  script.src = 'http://rating.jenkins.io/rate/submit.php?version='
+  script.src = 'https://rating.jenkins.io/rate/submit.php?version='
     + encodeURIComponent(version) + '&rating=' + rating + '&issue=' + encodeURIComponent(issue);
   script.onload = function() { alert('Thanks!'); location.reload(); }
   script.onreadystatechange = function() { // For IE
