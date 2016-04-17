@@ -4,7 +4,7 @@ var crumb = { wrap: function() { } };
 function loaddata(link) {
   var script = document.createElement('SCRIPT');
   script.type = 'text/javascript';
-  script.src = 'https://jenkins-ci.org/rate/result.php';
+  script.src = 'http://rating.jenkins.io/rate/result.php';
   script.onload = function() { do_loaddata(); }
   script.onreadystatechange = function() { // For IE
     if (this.readyState=='loaded' || this.readyState=='complete') do_loaddata();
@@ -36,7 +36,7 @@ function do_loaddata() {
     if (r && r.length > 3) {
       txt += '<span class="related-issues">Related issues: ';
       for (j = 3; j < r.length; j+=2)
-        txt += r[j+1] + '&times;<a href="https://jenkins-ci.org/issue/' + r[j] + '">JENKINS-' + r[j] + '</a> ';
+        txt += r[j+1] + '&times;<a href="https://issues.jenkins-ci.org/browse/JENKINS-' + r[j] + '">JENKINS-' + r[j] + '</a> ';
       txt += '</span>';
     }
     div2.innerHTML = txt;
@@ -54,7 +54,7 @@ function rate(version,rating) {
   if (issue==null) return; // Cancelled
   var script = document.createElement('SCRIPT');
   script.type = 'text/javascript';
-  script.src = 'https://jenkins-ci.org/rate/submit.php?version='
+  script.src = 'http://rating.jenkins.io/rate/submit.php?version='
     + encodeURIComponent(version) + '&rating=' + rating + '&issue=' + encodeURIComponent(issue);
   script.onload = function() { alert('Thanks!'); location.reload(); }
   script.onreadystatechange = function() { // For IE
