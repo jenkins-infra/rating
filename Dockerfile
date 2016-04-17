@@ -1,8 +1,7 @@
 FROM php:5.6-apache
 
-# Add Postgres module
-RUN apt-get update
-#RUN apt-get install -y libpq-dev && docker-php-ext-install pdo pdo_pgsql
-RUN apt-get install -y php5-pgsql
+# docker php image has its own way of installing a module
+RUN apt-get update && apt-get install -y libpq-dev
+RUN docker-php-ext-install pgsql
 
 COPY src/ /var/www/html/rate/
