@@ -6,9 +6,6 @@ TAG = $(shell git rev-parse HEAD | cut -b 1-7)
 docker:
 	docker build -t $(IMAGE):$(TAG) .
 
-push: docker
-	docker push $(IMAGE):$(TAG)
-
 run: docker
 	docker-compose up --build
 
