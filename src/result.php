@@ -1,8 +1,8 @@
 <?php
   header('Content-type: text/javascript');
   header('Cache-control: no-cache');
-  require_once('/usr/share/drupal6/sites/default/dbconfig.php');
-  $db = @pg_connect("user=$dbuser password=$dbpass host=$dbserver dbname=mindless");
+  require_once('/config/dbconfig.php');
+  $db = @pg_connect("user=$dbuser password=$dbpass host=$dbserver dbname=$dbname");
   if (!$db) die('DB error');
   $data = array();
   $q = pg_query($db,
