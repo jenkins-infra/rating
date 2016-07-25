@@ -16,7 +16,7 @@ function loaddata(link) {
 }
 
 function health(nm,sz,ver,rate) {
-  return '<img src="https://ci.jenkins-ci.org/images/' + sz + 'x' + sz + '/health-' + nm
+  return '<img src="https://ci.jenkins.io/images/' + sz + 'x' + sz + '/health-' + nm
        + '.gif" width="' + sz + '" height="' + sz + '" onclick="rate(\'' + ver
        + '\',' + rate + ')" class="rate" alt=""/>';
 }
