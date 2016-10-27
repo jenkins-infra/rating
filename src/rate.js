@@ -52,6 +52,10 @@ function insertAfter(anchor,node) {
 function rate(version,rating) {
   var issue = (rating <= 0) ? prompt('Please provide issue number from our JIRA causing trouble:','') : '';
   if (issue==null) return; // Cancelled
+  if (rating <= 0 && issue == '') {
+    issue = prompt('Are you sure you do not want to provide an issue reference? It really helps us improve Jenkins.\nEnter issue number, or leave empty to skip:', '');
+    if (issue==null) return; // Cancelled
+  }
   var script = document.createElement('SCRIPT');
   script.type = 'text/javascript';
   script.src = 'https://rating.jenkins.io/rate/submit.php?version='
