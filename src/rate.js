@@ -16,7 +16,7 @@ function loaddata(link) {
 }
 
 function health(nm,sz,ver,rate) {
-  return '<img src="https://ci.jenkins.io/images/' + sz + 'x' + sz + '/health-' + nm
+  return '<img src="https://rating.jenkins.io/rate/images/' + sz + 'x' + sz + '/' + nm
        + '.gif" width="' + sz + '" height="' + sz + '" onclick="rate(\'' + ver
        + '\',' + rate + ')" class="rate" alt=""/>';
 }
@@ -30,9 +30,9 @@ function do_loaddata() {
     div1.className = 'rate-outer';
     div2 = document.createElement('DIV');
     div2.className = 'rate-offset';
-    txt = (r && r[0] ? r[0] + ' ' : '') + health('80plus',(r && r[0] ? 32 : 16),v,1)
-        + (r && r[1] ? r[1] + ' ' : '') + health('40to59',(r && r[1] ? 32 : 16),v,0)
-        + (r && r[2] ? r[2] + ' ' : '') + health('00to19',(r && r[2] ? 32 : 16),v,-1);
+    txt = (r && r[0] ? r[0] + ' ' : '') + health('sunny',(r && r[0] ? 32 : 16),v,1)
+        + (r && r[1] ? r[1] + ' ' : '') + health('cloudy',(r && r[1] ? 32 : 16),v,0)
+        + (r && r[2] ? r[2] + ' ' : '') + health('storm',(r && r[2] ? 32 : 16),v,-1);
     if (r && r.length > 3) {
       txt += '<span class="related-issues">Related issues: ';
       for (j = 3; j < r.length; j+=2)
