@@ -23,9 +23,9 @@ function health(nm,sz,ver,rate) {
 
 function do_loaddata() {
   var r, v, j = true, div1, div2, txt;
-  for (var anchors = document.getElementsByTagName('A'), i = 0; i < anchors.length; i++) {
-    if (anchors[i].name.charAt(0) != 'v') continue;
-    r = data[v = anchors[i].name.substring(1)];
+  for (var anchors = document.getElementsByTagName('H3'), i = 0; i < anchors.length; i++) {
+    if (anchors[i].id.charAt(0) != 'v') continue;
+    r = data[v = anchors[i].id.substring(1)];
     div1 = document.createElement('DIV');
     div1.className = 'rate-outer';
     div2 = document.createElement('DIV');
@@ -41,12 +41,8 @@ function do_loaddata() {
     }
     div2.innerHTML = txt;
     div1.appendChild(div2);
-    insertAfter(anchors[i].parentNode,div1);
+    anchors[i].parentNode.insertBefore(div1, anchors[i].nextElementSibling);
   }
-}
-
-function insertAfter(anchor,node) {
-  anchor.parentNode.insertBefore(node,anchor.nextSibling);
 }
 
 function rate(version,rating) {
