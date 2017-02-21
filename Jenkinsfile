@@ -17,10 +17,14 @@ node('docker') {
     shortCommit = readFile('GIT_COMMIT').take(6)
     def imageTag = "build${shortCommit}"
 
+    def whale
+    stage('Build') {
+        whale = docker.build("${imageName}:${imageTag}")
+    }
 
-    stage 'Build'
-    def whale = docker.build("${imageName}:${imageTag}")
-
-    stage 'Deploy'
-    whale.push()
+    if (infra.isTrusted()) {
+      stage('Deploy') {
+          whale.push()
+      }
+    }
 }
