@@ -34,7 +34,7 @@
   }
   $q = pg_query($db, 'select version, rollback, issue from jenkins_bad order by version');
   while ($row = pg_fetch_row($q)) {
-    addRow($data, $row[0], $row[1]=='t' ? 'rollback' : 'nolike', $row[1]);
+    addRow($data, $row[0], $row[1]=='t' ? 'rollback' : 'nolike');
     if ($row[2]) {
       addIssue($data, $row[0], $row[2]);
     }
