@@ -7,13 +7,13 @@ services:
       - "8085:80"
     volumes:
       - ./test/config:/config
+      - ./src/:/var/www/html/rate/
     depends_on:
       - postgres
   postgres:
-    image: postgres
+    image: postgres:9
     volumes:
       - ./test/initdb.d:/docker-entrypoint-initdb.d
-      - ./schema.sql:/docker-entrypoint-initdb.d/10-schema.sql
     environment:
       - POSTGRES_USER=rating
       - POSTGRES_PASSWORD=s3cr3t
