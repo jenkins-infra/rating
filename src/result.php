@@ -1,36 +1,54 @@
 <?php
-  header('Content-type: text/javascript');
   header('Cache-control: no-cache');
   require_once('/config/dbconfig.php');
-  $db = @pg_connect("user=$dbuser password=$dbpass host=$dbserver dbname=$dbname");
-  if (!$db) die('DB error');
   $data = array();
-  $q = pg_query($db,
-    'select version, count(*) from jenkins_good group by version');
-  while ($row = pg_fetch_row($q)) {
-    $data[$row[0]] = array('good' => $row[1]);
+  function isVersionNumber($val) {
+    if (preg_match('/^[0-9.rc]+$/', $val)) { return true; }
+    return false;
   }
-  $q = pg_query($db,
-    'select version, rollback, issue from jenkins_bad order by version');
-  while ($row = pg_fetch_row($q)) {
-    $data[$row[0]][$row[1]=='t' ? 'rollback' : 'nolike']++;
-    if ($row[2]) $data[$row[0]]['issues'][] = $row[2];
+  function addRow(&$data, $key, $type, $count = 1) {
+    $keyToCol = array('good' => 0, 'nolike' => 1, 'rollback' => 2);
+    if (!isVersionNumber($key)) { return; }
+    if (!isset($data[$key])) { $data[$key] = array(0,0,0); }
+    $data[$key][$keyToCol[$type]] += $count;
   }
-  pg_close($db);
-  print 'var data = {';
-  $first = true;
-  foreach ($data as $version => $info) {
-    if ($first) $first = false; else print ",\n";
-    foreach (array('good','rollback','nolike') as $key) if (!isset($info[$key])) $info[$key] = 0;
-    print json_encode($version) . ": [$info[good],$info[nolike],$info[rollback]";
-    if ($info[issues]) {
-      $issues = array_count_values($info['issues']);
-      arsort($issues);
-      foreach ($issues as $issue => $counts) {
-        print ",$issue,$counts";
+
+  function addIssue(&$data, $key, $issue, $count = 1) {
+    if (!isVersionNumber($key)) { return; }
+    // find the issue in the array already and increase value
+    for ($i = 3; $i < count($data[$key]); $i+=2) {
+      if ($data[$key][$i] == $issue) {
+        $data[$key][$i + 1] += $count;
+        return;
       }
     }
-    print "]";
+    $data[$key][] = $issue;
+    $data[$key][] = $count;
   }
-  print "\n};\n";
-?>
+
+  $db = @pg_connect("user=$dbuser password=$dbpass host=$dbserver dbname=$dbname");
+  if (!$db) die('DB error');
+  $q = pg_query($db, 'select version, count(*) from jenkins_good group by version');
+  while ($row = pg_fetch_row($q)) {
+    addRow($data, $row[0], 'good', $row[1]);
+  }
+  $q = pg_query($db, 'select version, rollback, issue from jenkins_bad order by version');
+  while ($row = pg_fetch_row($q)) {
+    addRow($data, $row[0], $row[1]=='t' ? 'rollback' : 'nolike', $row[1]);
+    if ($row[2]) {
+      addIssue($data, $row[0], $row[2]);
+    }
+  }
+  pg_close($db);
+
+  $json = json_encode($data);
+  if ($_GET['callback']) {
+    header('Content-type: application/javascript');
+    echo $_GET['callback'] . '(' . $json . ');';
+  } else if ($_GET['json']) {
+    header('Content-type: application/json');
+    echo $json;
+  } else {
+    header('Content-type: application/javascript');
+    echo 'var data = ' . $json . ';';
+  }

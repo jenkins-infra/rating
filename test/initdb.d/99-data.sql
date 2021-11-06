@@ -8,4 +8,5 @@ COPY jenkins_bad (version, rollback, issue, voter) FROM stdin;
 COPY jenkins_good (version, voter) FROM stdin;
 1.358	1.2.3.4
 1.359	1.2.3.5
+hackyhack	1.2.3.5
 \.
