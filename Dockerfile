@@ -6,8 +6,6 @@ RUN apt-get update \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-RUN docker-php-ext-install pgsql
-
-RUN a2enmod headers
+RUN docker-php-ext-install pgsql && a2enmod headers
 COPY apache.conf /etc/apache2/conf-enabled/rating.conf
 COPY src/ /var/www/html/rate/
