@@ -1,5 +1,1 @@
-buildDockerAndPublishImage('rating', [
-    mainBranch: 'master',
-    automaticSemanticVersioning: true,
-    gitCredentials: 'github-app-infra'
-])
+buildDockerAndPublishImage('rating', [automaticSemanticVersioning: true])
