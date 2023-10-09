@@ -4,8 +4,8 @@
     require_once('/config/dbconfig.php');
     $db = @pg_connect("user=$dbuser password=$dbpass host=$dbserver dbname=$dbname");
     if (!$db) die('DB error');
-    $voter = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    if (empty($voter)) $voter = $_SERVER['REMOTE_ADDR'];
+    $voter = getenv('HTTP_X_FORWARDED_FOR');
+    if (empty($voter)) $voter = getenv('REMOTE_ADDR');
     if ($_GET['rating'] == 1) {
       pg_insert($db, 'jenkins_good', array('version' => $_GET['version'], 'voter' => $voter));
     } else {

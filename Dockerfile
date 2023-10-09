@@ -1,8 +1,8 @@
-FROM php:5.6-apache
+FROM php:8.2-apache
 
 # docker php image has its own way of installing a module
 RUN apt-get update \
-  && apt-get install --no-install-recommends -y libpq-dev=9.6.24-0+deb9u1 \
+  && apt-get install --no-install-recommends -y libpq-dev=15.3-0+deb12u1 \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
