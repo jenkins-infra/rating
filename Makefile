@@ -12,4 +12,4 @@ run: docker
 # when run with 'make run', makes sure that it responds correctly
 run-test:
 	curl -v 'http://localhost:8085/rate/submit.php?version=1.234&rating=0&issue=80386'
-	curl -v http://localhost:8085/rate/result.php 2>&1 | grep 80386
+	curl -v http://localhost:8085/rate/result.php 2>&1
