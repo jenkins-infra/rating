@@ -1,1 +1,1 @@
-buildDockerAndPublishImage('rating', [automaticSemanticVersioning: true])
+buildDockerAndPublishImage('rating', [automaticSemanticVersioning: true, targetplatforms: 'linux/amd64,linux/arm64'])
