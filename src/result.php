@@ -42,10 +42,10 @@
   pg_close($db);
 
   $json = json_encode($data);
-  if ($_GET['callback']) {
+  if (isset($_GET['callback'])) {
     header('Content-type: application/javascript');
     echo $_GET['callback'] . '(' . $json . ');';
-  } else if ($_GET['json']) {
+  } else if (isset($_GET['json'])) {
     header('Content-type: application/json');
     echo $json;
   } else {
