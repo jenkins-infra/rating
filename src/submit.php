@@ -1,6 +1,6 @@
 <?php
   /* @author Alan Harder */
-  if ($_GET['version']) {
+  if (isset($_GET['version'])) {
     require_once('/config/dbconfig.php');
     $db = @pg_connect("user=$dbuser password=$dbpass host=$dbserver dbname=$dbname");
     if (!$db) die('DB error');
