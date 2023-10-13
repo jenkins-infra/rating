@@ -14,4 +14,4 @@ COPY apache.conf /etc/apache2/conf-enabled/rating.conf
 RUN sed -i 's/^ServerTokens/#ServerTokens/g' /etc/apache2/conf-available/security.conf \
   && sed -i 's/^ServerSignature/#ServerSignature/g' /etc/apache2/conf-available/security.conf
 
-COPY src/ /var/www/html/rate/
+COPY src/ /var/www/html
