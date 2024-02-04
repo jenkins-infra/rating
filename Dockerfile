@@ -1,7 +1,7 @@
 FROM php:8.2-apache
 
 ## Always use latest libpq-dev version
-# hadolint ignore=DL3006
+# hadolint ignore=DL3008
 RUN apt-get update \
   && apt-get install --no-install-recommends -y libpq-dev \
   && apt-get clean \
