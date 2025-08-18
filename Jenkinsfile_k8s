@@ -1,1 +1,4 @@
-buildDockerAndPublishImage('rating', [targetplatforms: 'linux/amd64,linux/arm64'])
+buildDockerAndPublishImage('rating', [
+  publishToPrivateAzureRegistry: true,
+  targetplatforms: 'linux/arm64',
+])
