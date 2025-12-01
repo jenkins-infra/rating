@@ -3,7 +3,7 @@ SET client_encoding = 'UTF8';
 CREATE TABLE jenkins_bad (
     version character varying(10) NOT NULL,
     rollback boolean NOT NULL,
-    issue integer,
+    issue text,
     voter character varying(30)
 );
 

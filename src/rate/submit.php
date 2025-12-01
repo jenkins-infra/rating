@@ -11,8 +11,13 @@
     } else {
       $row = array('version' => $_GET['version'], 'voter' => $voter,
                    'rollback' => $_GET['rating'] == -1);
-      $issue = (int)preg_replace('/^(JENKINS|HUDSON)-/i', '', $_GET['issue']);
-      if ($issue > 0) $row['issue'] = $issue;
+
+      if (isset($_GET['issue']) && preg_match('#^https://github\.com/jenkinsci/[a-zA-Z0-9._-]+/issues/(\d+)$#', $_GET['issue'], $matches)) {
+        $row['issue'] = $_GET['issue'];
+      } else {
+        $issue = (int)preg_replace('/^(JENKINS|HUDSON)-/i', '', $_GET['issue']);
+        if ($issue > 0) $row['issue'] = $issue;
+      }
       pg_insert($db, 'jenkins_bad', $row);
     }
     pg_close($db);
