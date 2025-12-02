@@ -11,8 +11,10 @@
     } else {
       $row = array('version' => $_GET['version'], 'voter' => $voter,
                    'rollback' => $_GET['rating'] == -1);
-
-      $issue = rtrim($_GET['issue'], '/');
+      // Remove any fragment from issue URL
+      $issue = preg_replace('/#.*$/', '', $_GET['issue']);
+      // Remove trailing slash
+      $issue = rtrim($issue, '/');
       if (isset($_GET['issue']) && preg_match('#^https://github\.com/jenkinsci/[a-zA-Z0-9._-]+/issues/(\d+)$#', $issue, $matches)) {
         $row['issue'] = $issue;
       } else {
