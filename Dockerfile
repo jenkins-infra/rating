@@ -1,11 +1,13 @@
 FROM php:8.2-apache
 
-# docker php image has its own way of installing a module
+## Always use latest libpq-dev version
+# hadolint ignore=DL3008
 RUN apt-get update \
-  && apt-get install --no-install-recommends -y libpq-dev=15.3-0+deb12u1 \
+  && apt-get install --no-install-recommends -y libpq-dev \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
+# docker php image has its own way of installing a module
 RUN docker-php-ext-install pgsql && a2enmod headers
 
 # Custom Apache Configuration
@@ -14,4 +16,4 @@ COPY apache.conf /etc/apache2/conf-enabled/rating.conf
 RUN sed -i 's/^ServerTokens/#ServerTokens/g' /etc/apache2/conf-available/security.conf \
   && sed -i 's/^ServerSignature/#ServerSignature/g' /etc/apache2/conf-available/security.conf
 
-COPY src/ /var/www/html/rate/
+COPY src/ /var/www/html

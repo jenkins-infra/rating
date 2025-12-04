@@ -7,7 +7,7 @@ services:
       - "8085:80"
     volumes:
       - ./test/config:/config
-      - ./src/:/var/www/html/rate/
+      - ./src/:/var/www/html/
     depends_on:
       - postgres
   postgres:
