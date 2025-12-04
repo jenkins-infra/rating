@@ -11,8 +11,16 @@
     } else {
       $row = array('version' => $_GET['version'], 'voter' => $voter,
                    'rollback' => $_GET['rating'] == -1);
-      $issue = (int)preg_replace('/^(JENKINS|HUDSON)-/i', '', $_GET['issue']);
-      if ($issue > 0) $row['issue'] = $issue;
+      // Remove any fragment from issue URL
+      $issue = preg_replace('/#.*$/', '', $_GET['issue']);
+      // Remove trailing slash
+      $issue = rtrim($issue, '/');
+      if (isset($_GET['issue']) && preg_match('#^https://github\.com/jenkinsci/[a-zA-Z0-9._-]+/issues/(\d+)$#', $issue, $matches)) {
+        $row['issue'] = $issue;
+      } else {
+        $issue = (int)preg_replace('/^(JENKINS|HUDSON)-/i', '', $_GET['issue']);
+        if ($issue > 0) $row['issue'] = $issue;
+      }
       pg_insert($db, 'jenkins_bad', $row);
     }
     pg_close($db);
