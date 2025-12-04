@@ -4,7 +4,7 @@ CREATE TABLE jenkins_bad (
     version character varying(10) NOT NULL,
     rollback boolean NOT NULL,
     issue text,
-    voter character varying(30)
+    voter character varying(64)
 );
 
 ALTER TABLE public.jenkins_bad OWNER TO rating;
@@ -15,7 +15,7 @@ ALTER TABLE public.jenkins_bad OWNER TO rating;
 
 CREATE TABLE jenkins_good (
     version character varying(10) NOT NULL,
-    voter character varying(30)
+    voter character varying(64)
 );
 
 
