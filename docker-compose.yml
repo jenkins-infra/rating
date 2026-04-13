@@ -6,14 +6,14 @@ services:
     ports:
       - "8085:80"
     volumes:
-      - ./test/config:/config
+      - ./tests/config:/config
       - ./src/:/var/www/html/
     depends_on:
       - postgres
   postgres:
     image: postgres:9
     volumes:
-      - ./test/initdb.d:/docker-entrypoint-initdb.d
+      - ./tests/initdb.d:/docker-entrypoint-initdb.d
     environment:
       - POSTGRES_USER=rating
       - POSTGRES_PASSWORD=s3cr3t
