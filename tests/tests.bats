@@ -1,4 +1,9 @@
 #!/usr/bin/env bats
+
+setup() {
+    wait_for_service
+}
+
 wait_for_service() {
     for i in {1..10}; do
         if curl --silent --fail "http://localhost:8085/healthcheck.php" >/dev/null; then
@@ -11,9 +16,6 @@ wait_for_service() {
 }
 
 @test "service is healthy" {
-    run wait_for_service
-    [[ "${status}" -eq 0 ]]
-
     run curl --silent "http://localhost:8085/healthcheck.php"
     [[ "${status}" -eq 0 ]]
     [[ "${output}" == *"ok"* ]]
