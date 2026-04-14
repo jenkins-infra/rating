@@ -1,2 +1,2 @@
 bats
-target
+tests/junit-results.xml

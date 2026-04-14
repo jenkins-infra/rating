@@ -20,8 +20,7 @@ test: run bats
 	bats/bin/bats --version
 ifeq ($(CI), true)
 # Execute the test harness and write result to a TAP file
-	mkdir -p target
-	bats/bin/bats --trace --verbose-run tests/tests.bats --formatter junit | tee target/junit-results.xml
+	bats/bin/bats --trace --verbose-run tests/tests.bats --formatter junit | tee tests/junit-results.xml
 else
 # Execute the test harness
 	bats/bin/bats --trace --verbose-run tests/tests.bats --formatter pretty --timing
