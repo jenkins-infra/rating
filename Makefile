@@ -3,10 +3,10 @@ ALL:    docker
 IMAGE = jenkinsciinfra/rating
 TAG = $(shell git rev-parse HEAD | cut -b 1-7)
 
-docker:
+build:
 	docker build -t $(IMAGE):$(TAG) .
 
-run: docker
+run: build
 	docker-compose up --build --detach --force-recreate --renew-anon-volumes
 
 # Ensure bats exists in the current folder
