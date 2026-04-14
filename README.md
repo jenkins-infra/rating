@@ -6,6 +6,7 @@ https://github.com/jenkins-infra/helm-charts/tree/main/charts/rating
 
 # Developing
 Edit files, then `make run` to launch a dockerized version of the app with a temporary test database.
-Run `make run-test` to make sure the program is functional.
+
+Run `make test` to make sure the program is functional before opening a pull request.
 
 Run `docker-compose down` to wipe out the test database content. 
