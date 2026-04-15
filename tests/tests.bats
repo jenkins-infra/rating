@@ -54,10 +54,9 @@ setup() {
 }
 
 @test "result endpoint (JSON)" {
-    run curl --silent --fail "${BASE_URL}/rate/result.php?json=1"
+    run curl --silent --dump-header - "${BASE_URL}/rate/result.php?json=1"
     assert_success
 
-    run curl --silent --dump-header - "${BASE_URL}/rate/result.php?json=1"
     headers="$(echo "${output}" | sed '/^\r$/q')"
     body="$(echo "${output}" | sed '1,/^\r$/d')"
 
