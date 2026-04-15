@@ -11,7 +11,7 @@ services:
     depends_on:
       - postgres
   postgres:
-    image: postgres:9
+    image: postgres:17
     volumes:
       - ./tests/initdb.d:/docker-entrypoint-initdb.d
     environment:
