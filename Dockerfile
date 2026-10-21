@@ -8,7 +8,13 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 
 # docker php image has its own way of installing a module
-RUN docker-php-ext-install pgsql && a2enmod headers
+RUN docker-php-ext-install pgsql && a2enmod headers rewrite
+
+# Apply PHP security settings before request parsing
+COPY php-security.ini /usr/local/etc/php/conf.d/zz-security.ini
+
+# Enforce security settings and allow only GET/HEAD requests
+COPY php-security.conf /etc/apache2/conf-enabled/php-security.conf
 
 # Custom Apache Configuration
 COPY apache.conf /etc/apache2/conf-enabled/rating.conf
