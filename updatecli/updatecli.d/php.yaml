@@ -29,6 +29,7 @@ targets:
     name: Update PHP version in Dockerfile
     kind: dockerfile
     sourceid: getLatestRelease
+    scmid: default
     spec:
       file: Dockerfile
       instruction:
