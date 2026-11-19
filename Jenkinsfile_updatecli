@@ -1,0 +1,5 @@
+if (env.BRANCH_IS_PRIMARY) {
+    updatecli(action: 'apply', cronTriggerExpression: '@weekly')
+} else {
+    updatecli(action: 'diff')
+}
