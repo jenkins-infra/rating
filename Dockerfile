@@ -1,4 +1,4 @@
-FROM php:8.5-apache
+FROM php:8.5.13-apache
 
 ## Always use latest libpq-dev version
 # hadolint ignore=DL3008
