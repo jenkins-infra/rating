@@ -1,0 +1,46 @@
+
+name: Update PHP version in rating Dockerfile
+
+scms:
+  default:
+    kind: github
+    spec:
+      user: "{{ .github.user }}"
+      email: "{{ .github.email }}"
+      owner: "{{ .github.owner }}"
+      repository: "{{ .github.repository }}"
+      token: "{{ requiredEnv .github.token }}"
+      username: "{{ .github.username }}"
+      branch: "{{ .github.branch }}"
+
+sources:
+  getLatestRelease:
+    name: Get latest PHP Apache image version
+    kind: dockerimage
+    spec:
+      image: php
+      tagfilter: '^\d+\.\d+\.\d+-apache$'
+      versionfilter:
+        kind: regex
+        pattern: '^\d+\.\d+\.\d+-apache$'
+
+targets:
+  updateDockerfile:
+    name: Update PHP version in Dockerfile
+    kind: dockerfile
+    sourceid: getLatestRelease
+    spec:
+      file: Dockerfile
+      instruction:
+        keyword: FROM
+        matcher: php
+
+actions:
+  default:
+    kind: github/pullrequest
+    title: Bump PHP version to {{ source "getLatestRelease" }}
+    scmid: default
+    spec:
+      labels:
+        - dependencies
+        - php
