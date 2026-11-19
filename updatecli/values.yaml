@@ -2,6 +2,6 @@ github:
   user: "jenkins-infra-updatecli"
   email: "178728+jenkins-infra-updatecli[bot]@users.noreply.github.com"
   token: "UPDATECLI_GITHUB_TOKEN"
-  branch: "master"
+  branch: "main"
   owner: "jenkins-infra"
   repository: "rating"
